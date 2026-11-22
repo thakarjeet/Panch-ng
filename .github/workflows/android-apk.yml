@@ -31,6 +31,48 @@ jobs:
           mkdir -p build_app/android/app/src/main/res/drawable
           cp android/app/src/main/res/drawable/panchang_launcher.xml build_app/android/app/src/main/res/drawable/panchang_launcher.xml
           cp android/app/src/main/AndroidManifest.xml build_app/android/app/src/main/AndroidManifest.xml
+      - name: Enable Android core library desugaring
+        working-directory: build_app/android/app
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          gradle_file = next(
+              (path for path in (Path("build.gradle.kts"), Path("build.gradle")) if path.is_file()),
+              None,
+          )
+          if gradle_file is None:
+              raise SystemExit("Generated Android app Gradle file was not found.")
+
+          content = gradle_file.read_text()
+          is_kotlin = gradle_file.suffix == ".kts"
+          flag = "isCoreLibraryDesugaringEnabled = true" if is_kotlin else "coreLibraryDesugaringEnabled true"
+          dependency = (
+              'coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")'
+              if is_kotlin
+              else "coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'"
+          )
+
+          compile_options = re.search(r"(?m)^([ \t]*)compileOptions[ \t]*\{", content)
+          if compile_options is None:
+              raise SystemExit("Generated Android Gradle file has no compileOptions block.")
+          if flag not in content:
+              indent = compile_options.group(1) + "    "
+              index = compile_options.end()
+              content = content[:index] + f"\n{indent}{flag}" + content[index:]
+
+          if "com.android.tools:desugar_jdk_libs:" not in content:
+              dependencies = re.search(r"(?m)^([ \t]*)dependencies[ \t]*\{", content)
+              if dependencies is None:
+                  content += f"\ndependencies {{\n    {dependency}\n}}\n"
+              else:
+                  indent = dependencies.group(1) + "    "
+                  index = dependencies.end()
+                  content = content[:index] + f"\n{indent}{dependency}" + content[index:]
+
+          gradle_file.write_text(content)
+          PY
       - name: Resolve dependencies
         working-directory: build_app
         run: flutter pub get

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111a3d"/>
+      <stop offset=".58" stop-color="#1b3560"/>
+      <stop offset="1" stop-color="#0e615d"/>
+    </linearGradient>
+    <radialGradient id="aura">
+      <stop offset="0" stop-color="#ffc95c" stop-opacity=".36"/>
+      <stop offset="1" stop-color="#ffc95c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0a6"/>
+      <stop offset="1" stop-color="#f6a83b"/>
+    </linearGradient>
+    <linearGradient id="lotus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6d5"/>
+      <stop offset="1" stop-color="#f4b65a"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="488" height="488" rx="112" fill="url(#sky)"/>
+  <circle cx="256" cy="204" r="174" fill="url(#aura)"/>
+  <g fill="#ffd47a">
+    <circle cx="256" cy="55" r="5"/>
+    <circle cx="361" cy="98" r="4"/>
+    <circle cx="405" cy="204" r="5"/>
+    <circle cx="361" cy="310" r="4"/>
+    <circle cx="151" cy="98" r="4"/>
+    <circle cx="107" cy="204" r="5"/>
+    <circle cx="151" cy="310" r="4"/>
+  </g>
+  <g stroke="#ffd47a" stroke-linecap="round" stroke-width="9">
+    <path d="M256 68v24"/>
+    <path d="M349 106l-17 17"/>
+    <path d="M387 204h-24"/>
+    <path d="M163 106l17 17"/>
+    <path d="M125 204h24"/>
+  </g>
+  <circle cx="256" cy="204" r="91" fill="#ffc65a" opacity=".16"/>
+  <circle cx="256" cy="204" r="76" fill="url(#sun)"/>
+  <path d="M120 303c42-37 84-52 136-52s94 15 136 52" fill="none" stroke="#8bd6c2" stroke-opacity=".72" stroke-width="9" stroke-linecap="round"/>
+  <path d="M128 324c37-18 80-27 128-27s91 9 128 27" fill="none" stroke="#4eaf9d" stroke-opacity=".68" stroke-width="7" stroke-linecap="round"/>
+  <g fill="url(#lotus)" stroke="#fff0c1" stroke-opacity=".8" stroke-width="3" stroke-linejoin="round">
+    <path d="M256 373c-35-32-37-68 0-104 37 36 35 72 0 104Z"/>
+    <path d="M249 370c-45-7-68-34-62-78 43 12 64 37 62 78Z"/>
+    <path d="M263 370c45-7 68-34 62-78-43 12-64 37-62 78Z"/>
+    <path d="M245 375c-45 8-77-9-91-49 43-4 74 13 91 49Z"/>
+    <path d="M267 375c45 8 77-9 91-49-43-4-74 13-91 49Z"/>
+  </g>
+  <path d="M181 388c47 18 103 23 150 0" fill="none" stroke="#f6c66e" stroke-width="7" stroke-linecap="round"/>
+</svg>

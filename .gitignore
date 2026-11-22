@@ -22,6 +22,14 @@ misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+coverage/
+build_app/
+
 # Keystore files
 *.jks
 *.keystore

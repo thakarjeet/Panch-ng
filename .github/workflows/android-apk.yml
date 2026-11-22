@@ -1,0 +1,51 @@
+name: Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Create Android project wrapper
+        run: flutter create --platforms=android --project-name=panchang --org=app.panchang build_app
+      - name: Install application sources
+        run: |
+          rm -rf build_app/lib build_app/test build_app/assets
+          mkdir -p build_app/lib build_app/test build_app/assets
+          cp pubspec.yaml build_app/pubspec.yaml
+          cp -R lib/. build_app/lib/
+          cp -R assets/. build_app/assets/
+          cp -R test/. build_app/test/
+          mkdir -p build_app/android/app/src/main/res/drawable
+          cp android/app/src/main/res/drawable/panchang_launcher.xml build_app/android/app/src/main/res/drawable/panchang_launcher.xml
+          cp android/app/src/main/AndroidManifest.xml build_app/android/app/src/main/AndroidManifest.xml
+      - name: Resolve dependencies
+        working-directory: build_app
+        run: flutter pub get
+      - name: Analyze Dart sources
+        working-directory: build_app
+        run: flutter analyze
+      - name: Run tests
+        working-directory: build_app
+        run: flutter test --reporter expanded
+      - name: Build offline Android APK
+        working-directory: build_app
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: panchang-android-apk
+          path: build_app/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 30

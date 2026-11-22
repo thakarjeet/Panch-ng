@@ -1,0 +1,31 @@
+{
+  "source": "Drik Panchang, day Panchang page, Ahmedabad geoname-id 1279233",
+  "url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=20/03/2026&time-format=12-hour&geoname-id=1279233",
+  "retrievedOn": "2026-11-22",
+  "date": "2026-03-20",
+  "location": {
+    "name": "Ahmedabad",
+    "latitude": 23.0225,
+    "longitude": 72.5714,
+    "utcOffsetMinutes": 330
+  },
+  "published": {
+    "sunrise": "06:44",
+    "sunset": "18:51",
+    "moonrise": "07:23",
+    "moonset": "20:12",
+    "tithi": "Shukla Dwitiya",
+    "tithiEnd": "2026-03-21T02:30",
+    "nakshatra": "Revati",
+    "nakshatraEnd": "2026-03-21T02:27",
+    "shakaSamvat": 1948,
+    "rahuStart": "11:16",
+    "rahuEnd": "12:47",
+    "gulikaStart": "08:15",
+    "gulikaEnd": "09:46",
+    "yamagandaStart": "15:49",
+    "yamagandaEnd": "17:20",
+    "abhijitStart": "12:23",
+    "abhijitEnd": "13:11"
+  }
+}

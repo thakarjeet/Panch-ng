@@ -4,11 +4,13 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'
+    hide GlobalMaterialLocalizations;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -601,7 +603,7 @@ class PanchangShareCard extends StatelessWidget {
                     ),
                   ),
                 ],
-              ],
+              ),
               const SizedBox(height: 4),
               Text(
                 'Offline astronomy',
@@ -942,7 +944,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 Text('${day.date.day}'),
                                 const SizedBox(height: 3),
                                 Text(
-                                  text.tithi(
+                                  widget.text.tithi(
                                     day.tithi.replaceFirst(
                                       RegExp(r'^(Shukla|Krishna) '),
                                       '',
@@ -1185,7 +1187,7 @@ class _MuhuratScreenState extends State<MuhuratScreen> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<int>(
-                value: _activity,
+                initialValue: _activity,
                 decoration: InputDecoration(labelText: widget.text['activity']),
                 items: List.generate(
                   activities.length,
@@ -1519,7 +1521,7 @@ Future<void> _enableNotifications(
   try {
     tzdata.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
-    const plugin = FlutterLocalNotificationsPlugin();
+    final plugin = FlutterLocalNotificationsPlugin();
     const initialization = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
     );
@@ -1559,6 +1561,8 @@ Future<void> _enableNotifications(
             ),
           ),
           androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
         );
       }
 
@@ -1586,6 +1590,8 @@ Future<void> _enableNotifications(
               ),
             ),
             androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+            uiLocalNotificationDateInterpretation:
+                UILocalNotificationDateInterpretation.absoluteTime,
           );
         }
       }
@@ -1603,6 +1609,8 @@ Future<void> _enableNotifications(
             ),
           ),
           androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
         );
       }
     }

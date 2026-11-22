@@ -30,12 +30,12 @@ void main() {
       ('Abhijit start', day.abhijit!.start, published['abhijitStart'] as String),
       ('Abhijit end', day.abhijit!.end, published['abhijitEnd'] as String),
     ];
-    print('Reference comparison (engine minus Drik Panchang, minutes)');
-    print('| Quantity | Published | Engine | Difference |');
-    print('| --- | ---: | ---: | ---: |');
+    stdout.writeln('Reference comparison (engine minus Drik Panchang, minutes)');
+    stdout.writeln('| Quantity | Published | Engine | Difference |');
+    stdout.writeln('| --- | ---: | ---: | ---: |');
     for (final (label, actual, expected) in comparisons) {
       final difference = _signedClockDifference(actual, expected);
-      print(
+      stdout.writeln(
         '| $label | $expected | ${_formatClock(actual)} | ${difference >= 0 ? '+' : ''}$difference |',
       );
     }
@@ -44,7 +44,7 @@ void main() {
       ('Nakshatra end', day.nakshatraEnd, published['nakshatraEnd'] as String),
     ]) {
       final difference = _signedDateTimeDifference(actual, expected);
-      print(
+      stdout.writeln(
         '| $label | ${expected.replaceFirst('T', ' ')} | '
         '${actual.year}-${actual.month.toString().padLeft(2, '0')}-'
         '${actual.day.toString().padLeft(2, '0')} ${_formatClock(actual)} | '

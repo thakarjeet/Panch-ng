@@ -471,7 +471,7 @@ class PanchangEngine {
     final tithiIndex = (elongation / 12).floor();
     final tithiStartUtc = _previousCrossing(calculationInstant, _elongation, 12);
     final tithiEndUtc = _nextCrossing(calculationInstant, _elongation, 12);
-    final siderealLongitude = (DateTime utc) => normalizeDegrees(
+    double siderealLongitude(DateTime utc) => normalizeDegrees(
           astronomy.lunarLongitude(utc) - astronomy.lahiriAyanamsa(utc),
         );
     final siderealMoon = normalizeDegrees(
@@ -484,7 +484,7 @@ class PanchangEngine {
         _previousCrossing(calculationInstant, siderealLongitude, nakshatraSize);
     final nakshatraEndUtc =
         _nextCrossing(calculationInstant, siderealLongitude, nakshatraSize);
-    final yogaLongitude = (DateTime utc) => normalizeDegrees(
+    double yogaLongitude(DateTime utc) => normalizeDegrees(
           astronomy.lunarLongitude(utc) -
               astronomy.lahiriAyanamsa(utc) +
               astronomy.solarLongitude(utc) -
